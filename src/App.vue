@@ -1,17 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <h1>Matematik Sınav Uygulaması</h1>
+    <OperatorQuiz @onBack="onBack" v-if="operator" :operator="operator"></OperatorQuiz>
+    <OperatorSelector v-if="!operator" @changeOperator="changeOperator"></OperatorSelector></div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import OperatorSelector from "@/components/OperatorSelector";
+import OperatorQuiz from "@/components/OperatorQuiz";
 export default {
   name: 'App',
+  data (){
+    return {
+      operator : null,
+    }
+  },
+  methods: {
+    changeOperator(operator) {
+      this.operator = operator
+    },
+    onBack(){
+      this.operator = null
+    }
+  },
   components: {
-    HelloWorld
+    OperatorSelector : OperatorSelector,
+    OperatorQuiz : OperatorQuiz
   }
 }
 </script>
@@ -24,5 +38,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  font-size: 24px;
+}
+
+button{
+  padding: 20px;
+  width: 200px;
+  height: 80px;
+  margin-right: 10px;
+  background-color: #10aeb2;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }
 </style>
